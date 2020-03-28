@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { MyContext } from "./context";
 
 function App() {
+  return <Family />;
+}
+
+function Family() {
+  return <Person />;
+}
+
+function Person() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // Create a Consumer
+    <MyContext.Consumer>
+      {context => {
+        const { name, age } = context.teacher;
+        return (
+          <div>
+            <p>Hey, my name is {name}</p>
+            <p>I'm {age} years old.</p>
+            <button onClick={context.getYearOlder}>+ 1 year</button>
+          </div>
+        );
+      }}
+    </MyContext.Consumer>
   );
 }
 
